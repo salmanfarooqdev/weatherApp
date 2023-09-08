@@ -10,12 +10,31 @@ let humidityEl = document.querySelector('.humidity');
 inputBtn.addEventListener('click', function()
 {
     const searchCity = inputCity.value;
-    if(searchCity)
-    {
+    if(searchCity){
         showWeather(searchCity);
+    }
+    resetinput();
+    
+});
+
+inputCity.addEventListener('keydown', function(event) 
+{
+    if (event.key === 'Enter') {
+        event.preventDefault(); 
+        const searchCity = inputCity.value;
+        if (searchCity) {
+            showWeather(searchCity);
+        }
+        resetinput();
     }
     
 });
+
+function resetinput()
+{
+    inputCity.value = '';
+}
+
 
 async function showWeather(searchCity)
 {
@@ -49,9 +68,15 @@ function displayData(myData)
 {
     conditionEl.textContent = `${myData.condition}`;
     locationEl.innerHTML= `${myData.location}, ${myData.country}`;
-    degreeEl.textContent=`${myData.currentTemp}`;
+    degreeEl.innerHTML=`${myData.currentTemp}&deg;`;
     feelslikeEl.textContent=`FEELS LIKE: ${myData.feelsLike}`;
     windEl.textContent=`WIND: ${myData.wind} MPH`;
     humidityEl.textContent=`HUMIDITY: ${myData.humidity}`;
 
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Default city (Lahore) to display weather on page load
+    const defaultCity = 'Lahore';
+    showWeather(defaultCity);
+});
