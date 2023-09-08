@@ -39,11 +39,10 @@ function resetinput()
 async function showWeather(searchCity)
 {
     const apikey = '8f6f90ec5fbe47728db103426230609';
-    const url =  `http://api.weatherapi.com/v1/forecast.json?key=${apikey}&q=${searchCity}`;
+    const url =  `https://api.weatherapi.com/v1/forecast.json?key=${apikey}&q=${searchCity}`;
 
     const response = await fetch(url, {mode:'cors'});
     let weatherData = await response.json();
-    console.log(weatherData);
     const newData = processData(weatherData);
     displayData(newData);
 }
@@ -75,8 +74,8 @@ function displayData(myData)
 
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Default city (Lahore) to display weather on page load
+document.addEventListener('DOMContentLoaded', function () 
+{
     const defaultCity = 'Lahore';
     showWeather(defaultCity);
 });
